@@ -12,6 +12,40 @@
 // keyup events could be helpful to get value of field as the user types
 
 (function() {
-  // Magic!
-  console.log('Keepin\'n it clean with an external script!');
+ 	$('.flexsearch-input').keyup(function(e) {
+      // get the value of the input, converted to lower case
+    	var searchTerm = $('.flexsearch-input').val();
+      searchTerm = searchTerm.toLowerCase();
+      // initialize html of results to be displayed
+    	$('.flexsearch-results').html("");
+      // initialize URL of Google search to append flexsearch results to (from Chrome browser)
+      google = "https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q="
+
+
+      $.getJSON("http://www.mattbowytz.com/simple_api.json?data=all", function(data_all) {
+        data_all.data.interests.forEach(function(predictedResults) {
+          predictedResults = predictedResults.toLowerCase();
+          if(predictedResults.startsWith(searchTerm) && searchTerm.length > 0) {
+            $('.flexsearch-results').append("<p>"+predictedResults+"</p")/*.append("<a target='_blank' href=' + google + predictedResults'>'predictedResults'</a><br>")*/;
+          }
+        });
+        data_all.data.programming.forEach(function(predictedResults) {
+          predictedResults = predictedResults.toLowerCase();
+          if(predictedResults.startsWith(searchTerm) && searchTerm.length > 0) {
+            $('.flexsearch-results').append("<p>"+predictedResults+"</p")/*.append("<a target='_blank' href=' + google + predictedResults'>'predictedResults'</a><br>")*/;
+          }
+        });
+      })
+
+      $.getJSON("http://www.mattbowytz.com/simple_api.json?data=comics", function(data_comics) {
+        data_comics.data.forEach(function(predictedResults) {
+          predictedResults = predictedResults.toLowerCase();
+          if(predictedResults.startsWith(searchTerm) && searchTerm.length > 0) {
+            $('.flexsearch-results').append("<p>"+predictedResults+"</p")/*.append("<a target='_blank' href=' + google + predictedResults'>'predictedResults'</a><br>")*/;
+          }
+        });
+      })
+
+    });
+
 })();

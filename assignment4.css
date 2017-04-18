@@ -1,7 +1,9 @@
-/*
-  Don't forget to style the results from the search!
-  And anything elese you add to the application, for that matter.
-*/
+.flexsearch-results {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 26px;
+  font-style: italic;
+  padding: 10px 46px 0 10px;
+}
 
 .flexsearch-wrapper {
   height: auto;
